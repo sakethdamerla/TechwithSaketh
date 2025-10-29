@@ -1,18 +1,18 @@
-import YouTubeFeed from "../components/YouTubeFeed";
+
 const Home = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         {/* Background Pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-red-600/10 to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-red-600/10 to-transparent"></div>
         <div className="absolute top-10 left-10 w-32 h-32 bg-red-600/20 rounded-full blur-xl"></div>
         <div className="absolute bottom-10 right-10 w-48 h-48 bg-red-600/10 rounded-full blur-2xl"></div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 text-center md:text-left">
             {/* Profile Image */}
-            <div className="flex-shrink-0 mb-6 md:mb-0">
+            <div className="shrink-0 mb-6 md:mb-0">
               <div className="relative">
                 <div className="absolute inset-0 bg-red-600 rounded-full blur-lg transform scale-110"></div>
                 <img
@@ -59,7 +59,7 @@ const Home = () => {
         </div>
       </div>
 
-      <YouTubeFeed />
+    
 
       {/* Call to Action */}
       <div className="py-12 sm:py-16 bg-black">
