@@ -88,7 +88,7 @@ const Home = () => {
                 </svg>
               </a>
               <a
-                href="/affiliate"
+                href="./affiliate"
                 className="inline-flex items-center justify-center px-6 sm:px-8 lg:px-10 py-3 sm:py-4 border-2 border-red-600 text-red-600 font-bold text-base sm:text-lg rounded-lg hover:bg-red-600 hover:text-white transition-colors duration-300"
               >
                 View Products
