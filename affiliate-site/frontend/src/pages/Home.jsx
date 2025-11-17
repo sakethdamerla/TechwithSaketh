@@ -77,7 +77,9 @@ const Home = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
               <a
-                href="#subscribe"
+                href="https://www.youtube.com/@TechwithSakethTelugu"
+                 target="_blank"
+                  rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-red-600 text-white font-bold text-base sm:text-lg rounded-lg hover:bg-red-700 transition-colors duration-300 shadow-lg transform hover:scale-105"
               >
                 Subscribe Now
@@ -86,7 +88,7 @@ const Home = () => {
                 </svg>
               </a>
               <a
-                href="#products"
+                href="/affiliate"
                 className="inline-flex items-center justify-center px-6 sm:px-8 lg:px-10 py-3 sm:py-4 border-2 border-red-600 text-red-600 font-bold text-base sm:text-lg rounded-lg hover:bg-red-600 hover:text-white transition-colors duration-300"
               >
                 View Products
