@@ -2,35 +2,45 @@ import { useEffect, useState } from "react";
 
 function YouTubeFeed() {
   const [videos, setVideos] = useState([]);
+  const [error, setError] = useState(null);
   const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
   const CHANNEL_ID = import.meta.env.VITE_CHANNEL_ID;
   const MAX_RESULTS = 6;
 
   useEffect(() => {
     async function loadVideos() {
+      setError(null);
       try {
-        // Get channel ID first using the search API
-        const searchRes = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&q=${CHANNEL_ID}&type=channel&part=snippet&maxResults=1`
+        // Fetch videos directly using the channel ID
+        const res = await fetch(
+          `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}`
         );
-        const searchData = await searchRes.json();
 
-        if (searchData.items && searchData.items.length > 0) {
-          const channelId = searchData.items[0].id.channelId;
+        const data = await res.json();
 
-          // Now fetch videos using the channel ID
-          const res = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${channelId}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}`
-          );
-          const data = await res.json();
-          setVideos(data.items || []);
+        if (!res.ok || data.error) {
+          console.error('YouTube API Error:', data.error?.message || res.statusText);
+          if (data.error?.message?.includes('API key expired') || data.error?.message?.includes('API key not valid')) {
+            setError('YouTube API key has expired. Please get a new API key from Google Cloud Console.');
+          } else {
+            setError('Unable to load YouTube videos. Please check your API configuration.');
+          }
+          return;
         }
+
+        setVideos(data.items || []);
       } catch (error) {
         console.error("Error fetching videos:", error);
+        setError('Network error. Please check your internet connection.');
       }
     }
-    loadVideos();
-  }, []);
+
+    if (API_KEY && CHANNEL_ID) {
+      loadVideos();
+    } else {
+      setError('Missing YouTube API configuration. Please check your .env file.');
+    }
+  }, [API_KEY, CHANNEL_ID]);
 
   return (
     <div className="py-12 sm:py-16 bg-gray-900">
@@ -109,13 +119,17 @@ function YouTubeFeed() {
           </div>
         ) : (
           <div className="text-center py-12 sm:py-16">
-            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${error ? 'bg-red-900' : 'bg-gray-800'}`}>
+              <svg className={`w-6 h-6 sm:w-8 sm:h-8 ${error ? 'text-red-400' : 'text-gray-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
             </div>
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-400 mb-2">Loading latest videos...</h3>
-            <p className="text-sm sm:text-base text-gray-500">Connecting to YouTube API</p>
+            <h3 className={`text-lg sm:text-xl font-semibold mb-2 ${error ? 'text-red-400' : 'text-gray-400'}`}>
+              {error ? 'Error Loading Videos' : 'Loading latest videos...'}
+            </h3>
+            <p className={`text-sm sm:text-base ${error ? 'text-red-300' : 'text-gray-500'}`}>
+              {error || 'Connecting to YouTube API'}
+            </p>
           </div>
         )}
       </div>
