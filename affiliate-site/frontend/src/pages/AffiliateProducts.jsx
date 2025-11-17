@@ -1,68 +1,11 @@
 const AffiliateProducts = () => {
-  const categories = [
-    {
-      name: 'Tech Gadgets',
-      icon: (
-        <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-      ),
-      products: [
-        {
-          id: 1,
-          name: 'Mechanical Keyboard',
-          description: 'High-performance mechanical keyboard with RGB lighting and premium switches for gaming and productivity.',
-          image: '/keyboard.jpg',
-          price: '₹8,999',
-          features: ['Cherry MX Switches', 'RGB Backlighting', 'USB-C Connection'],
-          link: '#'
-        },
-        {
-          id: 2,
-          name: 'Wireless Earbuds',
-          description: 'Premium wireless earbuds with active noise cancellation and exceptional sound quality.',
-          image: '/earbuds.jpg',
-          price: '₹12,999',
-          features: ['ANC Technology', '40hr Battery Life', 'Touch Controls'],
-          link: '#'
-        },
-      ]
-    },
-    {
-      name: 'Smart Devices',
-      icon: (
-        <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-        </svg>
-      ),
-      products: [
-        {
-          id: 3,
-          name: 'Smart Home Hub',
-          description: 'Centralized smart home control with voice assistance and automation capabilities.',
-          image: '/smarthome.jpg',
-          price: '₹15,499',
-          features: ['Voice Control', 'Automation', 'Home Security'],
-          link: '#'
-        },
-        {
-          id: 4,
-          name: 'Wireless Charger',
-          description: 'Fast wireless charging pad with multiple device support and sleek design.',
-          image: '/wirelesscharger.jpg',
-          price: '₹2,499',
-          features: ['15W Fast Charging', 'Multi-Device', 'Modern Design'],
-          link: '#'
-        },
-      ]
-    }
-  ];
+  const categories = [];
 
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-600/10 to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-red-600/10 to-transparent"></div>
         <div className="absolute top-10 left-10 w-32 h-32 bg-red-600/20 rounded-full blur-xl"></div>
         <div className="absolute bottom-10 right-10 w-48 h-48 bg-red-600/10 rounded-full blur-2xl"></div>
 
@@ -93,62 +36,15 @@ const AffiliateProducts = () => {
       {/* Categories Section */}
       <div className="py-16 bg-gray-900">
         <div className="container mx-auto px-8">
-          {categories.map((category, categoryIndex) => (
-            <div key={categoryIndex} className="mb-16">
-              {/* Category Header */}
-              <div className="flex items-center mb-12">
-                {category.icon}
-                <h2 className="text-4xl font-bold text-white ml-4">{category.name}</h2>
+          {categories.length > 0 ? (
+            categories.map((category, categoryIndex) => (
+              <div key={categoryIndex} className="mb-16">
+                {/* ... product rendering logic would go here ... */}
               </div>
-
-              {/* Products Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {category.products.map(product => (
-                  <div key={product.id} className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 shadow-2xl hover:border-red-600/50 transition-colors duration-300">
-                    <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-8">
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                          <h3 className="text-2xl font-bold text-white mb-2">{product.name}</h3>
-                          <p className="text-gray-300 text-lg leading-relaxed mb-4">{product.description}</p>
-
-                          {/* Features */}
-                          <div className="mb-6">
-                            {product.features.map((feature, index) => (
-                              <span key={index} className="inline-block bg-red-600/20 text-red-400 px-3 py-1 rounded-full text-sm mr-2 mb-2">
-                                ✓ {feature}
-                              </span>
-                            ))}
-                          </div>
-
-                          {/* Price and CTA */}
-                          <div className="flex items-center justify-between">
-                            <div className="text-3xl font-bold text-red-600">{product.price}</div>
-                            <a
-                              href={product.link}
-                              className="inline-flex items-center px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors duration-300 shadow-lg"
-                            >
-                              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                              </svg>
-                              Buy Now
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Trusted Badge */}
-                    <div className="flex items-center justify-center bg-gray-700/50 py-4">
-                      <svg className="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-gray-300 text-sm">Personally Tested & Reviewed</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="text-center text-gray-400 text-2xl">no products for now</p>
+          )}
         </div>
       </div>
 
