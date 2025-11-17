@@ -1,4 +1,6 @@
 
+import YouTubeFeed from '../components/youtubefeed';
+
 const Home = () => {
   return (
     <div className="min-h-screen bg-black text-white">
@@ -59,7 +61,8 @@ const Home = () => {
         </div>
       </div>
 
-    
+      {/* YouTube Feed Section */}
+      <YouTubeFeed />
 
       {/* Call to Action */}
       <div className="py-12 sm:py-16 bg-black">
